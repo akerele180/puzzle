@@ -7,7 +7,7 @@ const Auth = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (state === "Log in") {
+    if (state === "Log In" || state) {
       navigate("/banks");
     }
   };
@@ -20,7 +20,7 @@ const Auth = () => {
             type="submit"
             className="bg-[#6366F1] text-white font-semibold w-1/3 md:w-2/6 hover:shadow-lg py-2 px-3 rounded flex items-center justify-center text-xs sm-text-base"
           >
-            {state || "Log in"}
+            {state || "Log In"}
           </button>
         </div>
       </form>

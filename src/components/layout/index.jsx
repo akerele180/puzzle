@@ -17,8 +17,8 @@ const Layout = () => {
                   </Link>
                 </li>
                 <li className="bg-[#6366F1] text-xs sm:text-base text-white p-2 rounded">
-                  <Link state="Log in" to={"login" || "/"}>
-                    Log in
+                  <Link state="Log In" to={"login" || "/"}>
+                    Log In
                   </Link>
                 </li>
               </ul>
