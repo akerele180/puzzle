@@ -1,0 +1,13 @@
+.toast {
+  animation: fadeOut 3s ease-in forwards;
+
+}
+
+@keyframes fadeOut {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -32px;
+  }
+}
