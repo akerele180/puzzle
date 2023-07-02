@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "name": "Access Bank PLC",
+      "id": 0,
+      "logo": "src/assets/Access Bank PLC Logo.png"
+    },
+    {
+      "name": "Aella Credit",
+      "id": 1,
+      "logo": "src/assets/Aella Credit Logo.png"
+    },
+    {
+      "name": "ALAT by Wema",
+      "id": 2,
+      "logo": "src/assets/ALAT by Wema Logo.png"
+    },
+    {
+      "name": "Aso Savings",
+      "id": 3,
+      "logo": "src/assets/Aso Savings Logo.png"
+    }
+  ]
+}
