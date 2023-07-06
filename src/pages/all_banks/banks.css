@@ -1,8 +1,17 @@
 .toast {
   animation: fadeOut 3s ease-in forwards;
-
 }
-
+.single_bank::after {
+  position: absolute;
+  content: "Log In";
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: aquamarine;
+  z-index: 5;
+  opacity: 0;
+}
 @keyframes fadeOut {
   0% {
     top: 0;

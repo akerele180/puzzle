@@ -2,8 +2,11 @@ import { useState } from "react";
 // import data from "../../utils/data/banks.json";
 import "./banks.css";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import InputField from "../../components/Inputs";
 
 const AllBanks = () => {
+  const navigate = useNavigate();
   const [bankData, setBankData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,26 +15,34 @@ const AllBanks = () => {
   const url = "https://nigerianbanks.xyz/";
 
   const fetchBanks = async () => {
-    setLoading(true);
-    const res = await fetch(url);
-    if (res.ok) {
-      console.log("123");
-      const data = await res.json();
-      setSuccess("Banks Retrieved Successfully");
-      setBankData(data);
+    try {
+      setLoading(true);
+      const res = await fetch(url);
+      if (res.ok) {
+        console.log("123");
+        const data = await res.json();
+        setSuccess("Banks Retrieved Successfully");
+        setBankData(data);
+        setLoading(false);
+      } else {
+        setLoading(false);
+        setError("Operation Failed. Try again!");
+      }
+    } catch (error) {
+      setError(error.message);
       setLoading(false);
-    } else {
-      setLoading(false);
-      setError("Operation Failed. Try again!");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     }
   };
 
   useEffect(() => {
-    fetchBanks();
-  }, []);
+    // fetchBanks();
+  }, [bankData.length]);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-6 w-10/12 sm:w-[80vw] mx-auto py-8">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-10/12 sm:w-[80vw] mx-auto py-8">
       {success || error ? (
         <span
           className={`z-50 text-center text-white text-xs sm:text-base px-3 py-1 absolute top-0 left-1/2 -translate-x-1/2 toast ${
@@ -44,11 +55,11 @@ const AllBanks = () => {
 
       {!loading ? (
         bankData.map((bank, idx) => (
-          <div key={idx}>
-            <div className="bg-white dark:bg-slate-800 p-8 flex flex-col items-center justify-center">
+          <div key={idx} className="">
+            <div className="cursor-pointer relative hover:after:opacity-100 single_bank bg-white dark:bg-slate-800 p-8 flex flex-col items-center justify-center after:ease-linear after:duration-300">
               <img src={bank.logo} alt={bank.name} className="" />
             </div>
-            <span className="px-1 block bg-white text-center leading-loose font-medium sm:font-semibold">
+            <span className="p-1 block bg-white text-center leading-loose font-medium sm:font-semibold">
               {bank.name}
             </span>
           </div>
@@ -58,8 +69,56 @@ const AllBanks = () => {
           Loading...
         </div>
       )}
+      <Modal />
     </div>
   );
 };
 
 export default AllBanks;
+
+const Modal = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  return (
+    <div
+      className={`absolute h-screen w-screen bg-black/20 top-0 bottom-0 z-50 left-0 right-0 flex items-center justify-center ${
+        !showModal && "hidden"
+      }`}
+    >
+      <form
+        className="bg-white p-8 rounded w-8/12 md:w-5/12 xl:w-3/12 space-y-3"
+        onSubmit={(e) => e.preventDefault()}
+      >
+        <div className="">
+          <InputField
+            type="email"
+            labelName="User ID"
+            placeholder="Enter your user id..."
+            color="primary"
+            htmlFor="user_id"
+          />
+        </div>
+        <div className="">
+          <InputField
+            type="password"
+            placeholder="Enter your password"
+            labelName="Password"
+            color="primary"
+            htmlFor="password"
+          />
+        </div>
+        <div className="flex items-center justify-center gap-3">
+          <button
+            className="text-[#6366F1] bg-white border border-[#6366F1] font-semibold w-1/3 md:w-2/6 hover:shadow-lg py-2 px-3 rounded flex items-center justify-center text-xs sm:text-base mt-4"
+            onClick={() => setShowModal(true)}
+          >
+            Cancel
+          </button>
+          <button className="bg-[#6366F1] text-white border font-semibold w-1/3 md:w-2/6 hover:shadow-lg py-2 px-3 rounded flex items-center justify-center text-xs sm:text-base mt-4">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};

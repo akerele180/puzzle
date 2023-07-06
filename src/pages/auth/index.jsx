@@ -1,7 +1,8 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import SolidButton from "../../components/Button";
 
 const Auth = () => {
-  const { state } = useLocation();
+  const { state, pathname } = useLocation();
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -16,12 +17,13 @@ const Auth = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <Outlet />
         <div className="flex items-center justify-center mt-4">
-          <button
+          <SolidButton
             type="submit"
-            className="bg-[#6366F1] text-white font-semibold w-1/3 md:w-2/6 hover:shadow-lg py-2 px-3 rounded flex items-center justify-center text-xs sm-text-base"
-          >
-            {state || "Log In"}
-          </button>
+            color={"[#6366F1]"}
+            buttonName={
+              state ?? (pathname.includes("s") ? "Sign Up" : "Log In")
+            }
+          />
         </div>
       </form>
     </section>

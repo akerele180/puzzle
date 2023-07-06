@@ -1,47 +1,46 @@
 import { Link } from "react-router-dom";
+import InputField from "../../components/Inputs";
 
 const SignUp = () => {
   return (
     <>
-      <h2 className="text-center text-xl sm:text-2xl font-bold pb-3 dark:text-white">SIGN UP</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 space-y-3">
+      <h2 className="text-center text-xl sm:text-2xl font-bold pb-3 dark:text-white">
+        SIGN UP
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 max-md:space-y-3">
         <div className="">
-          <label htmlFor="" className="dark:text-white text-sm font-semibold leading-loose mb-1 block">
-            First Name
-          </label>
-          <input
-            type="text"
-            className="border border-[#969696] px-4 py-2 rounded block w-full focus:border-[#6366F1] placeholder:italic placeholder:text-xs sm:placeholder:text-base text-xs sm:text-base"
+          <InputField
+            color="primary"
+            labelName="First Name"
+            htmlFor="first_name"
+            inputType="text"
             placeholder="Enter First Name"
           />
         </div>
         <div className="">
-          <label htmlFor="" className="dark:text-white text-sm font-semibold leading-loose mb-1 block">
-            Last Name
-          </label>
-          <input
-            type="text"
-            className="border border-[#969696] px-4 py-2 rounded block w-full focus:border-[#6366F1] placeholder:italic placeholder:text-xs sm:placeholder:text-base text-xs sm:text-base"
+          <InputField
+            color="primary"
+            labelName="Last Name"
+            htmlFor="last_name"
+            inputType="text"
             placeholder="Enter Last Name"
           />
         </div>
         <div className="">
-          <label htmlFor="" className="dark:text-white text-sm font-semibold leading-loose mb-1 block">
-            Email
-          </label>
-          <input
-            type="text"
-            className="border border-[#969696] px-4 py-2 rounded block w-full focus:border-[#6366F1] placeholder:italic placeholder:text-xs sm:placeholder:text-base text-xs sm:text-base"
-            placeholder="Enter Email Address..."
+          <InputField
+            color="primary"
+            labelName="Email"
+            htmlFor="email"
+            inputType="text"
+            placeholder="Enter email address..."
           />
         </div>
         <div className="">
-          <label htmlFor="" className="dark:text-white text-sm font-semibold leading-loose mb-1 block">
-            Phone Number
-          </label>
-          <input
-            type="number"
-            className="border border-[#969696] px-4 py-2 rounded block w-full focus:border-[#6366F1] placeholder:italic placeholder:text-xs sm:placeholder:text-base text-xs sm:text-base"
+          <InputField
+            color="primary"
+            labelName="Number"
+            htmlFor="phone"
+            inputType="number"
             placeholder="Enter Phone Number"
           />
         </div>
@@ -66,7 +65,7 @@ const SignUp = () => {
       </div>
       <span className="text-center text-xs sm:text-base block pt-2 leading-loose">
         Already have an account?{" "}
-        <Link to="/login" state="Log In" className=" underline text-[#6366F1]">
+        <Link to="/login" state="Log In" className="underline text-[#6366F1]">
           Login
         </Link>
       </span>

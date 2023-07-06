@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import InputField from "../../components/Inputs";
 
 const Login = () => {
   return (
@@ -6,17 +7,14 @@ const Login = () => {
       <h2 className="text-center text-xl sm:text-2xl font-bold pb-3 dark:text-white">
         LOGIN
       </h2>
+
       <div className="">
-        <label
-          htmlFor=""
-          className="dark:text-white text-sm font-semibold leading-loose mb-1 block"
-        >
-          Email
-        </label>
-        <input
-          type="text"
-          className="border border-[#969696] px-4 py-2 rounded block w-full focus:border-[#6366F1] placeholder:italic placeholder:text-xs sm:placeholder:text-base text-xs sm:text-base"
-          placeholder="Enter Email Address..."
+        <InputField
+          color="primary"
+          labelName="Email"
+          htmlFor="email"
+          inputType="text"
+          placeholder="Enter email address..."
         />
       </div>
 
