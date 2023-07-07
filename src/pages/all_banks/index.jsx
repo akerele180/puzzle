@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 // import data from "../../utils/data/banks.json";
 import "./banks.css";
@@ -11,6 +12,14 @@ const AllBanks = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [isModalClicked, setIsModalClicked] = useState(false);
+
+  document.addEventListener('keydown', (e)=>{
+    
+    if(e.key==='Escape') {
+      setIsModalClicked(false)
+    }
+  })
 
   const url = "https://nigerianbanks.xyz/";
 
@@ -19,7 +28,6 @@ const AllBanks = () => {
       setLoading(true);
       const res = await fetch(url);
       if (res.ok) {
-        console.log("123");
         const data = await res.json();
         setSuccess("Banks Retrieved Successfully");
         setBankData(data);
@@ -38,7 +46,7 @@ const AllBanks = () => {
   };
 
   useEffect(() => {
-    // fetchBanks();
+    fetchBanks();
   }, [bankData.length]);
 
   return (
@@ -54,41 +62,46 @@ const AllBanks = () => {
       ) : null}
 
       {!loading ? (
-        bankData.map((bank, idx) => (
-          <div key={idx} className="">
-            <div className="cursor-pointer relative hover:after:opacity-100 single_bank bg-white dark:bg-slate-800 p-8 flex flex-col items-center justify-center after:ease-linear after:duration-300">
-              <img src={bank.logo} alt={bank.name} className="" />
+        bankData.map((bank, idx) => {
+          let { slug, name, logo } = bank;
+          idx = slug;
+          return (
+            <div key={slug} className="">
+              <div
+                className="cursor-pointer relative single_bank bg-white dark:bg-slate-800 p-8 flex flex-col items-center justify-center after:ease-linear after:duration-300"
+                onClick={() => setIsModalClicked(true)}
+              >
+                <img src={logo} alt={name} className="" />
+              </div>
+              <span className="p-1 block bg-white text-center leading-loose font-medium sm:font-semibold">
+                {bank.name}
+              </span>
             </div>
-            <span className="p-1 block bg-white text-center leading-loose font-medium sm:font-semibold">
-              {bank.name}
-            </span>
-          </div>
-        ))
+          );
+        })
       ) : (
         <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2 text-lg">
           Loading...
         </div>
       )}
-      <Modal />
+      <Modal showModal={isModalClicked} setShowModal={setIsModalClicked}/>
     </div>
   );
 };
 
 export default AllBanks;
 
-const Modal = () => {
-  const [showModal, setShowModal] = useState(false);
+const Modal = ({showModal,setShowModal}) => {
 
   return (
     <div
-      className={`absolute h-screen w-screen bg-black/20 top-0 bottom-0 z-50 left-0 right-0 flex items-center justify-center ${
-        !showModal && "hidden"
-      }`}
+      className={`absolute h-screen w-screen bg-black/40 overflow-hidden top-0 bottom-0 z-50 left-0 right-0 flex items-center justify-center modal dark:bg-grey/70 ${!showModal && 'hidden'}`}
     >
       <form
-        className="bg-white p-8 rounded w-8/12 md:w-5/12 xl:w-3/12 space-y-3"
+        className="bg-white dark:bg-grey p-8 rounded w-8/12 md:w-5/12 xl:w-3/12 space-y-3 relative"
         onSubmit={(e) => e.preventDefault()}
       >
+        <span className="absolute top-0 right-0 duration-200 ease-in rounded-se cursor-pointer hover:bg-red-700 px-2 py-1 hover:text-white " onClick={() => setShowModal(false)}>&#128473;</span>
         <div className="">
           <InputField
             type="email"
@@ -110,7 +123,7 @@ const Modal = () => {
         <div className="flex items-center justify-center gap-3">
           <button
             className="text-[#6366F1] bg-white border border-[#6366F1] font-semibold w-1/3 md:w-2/6 hover:shadow-lg py-2 px-3 rounded flex items-center justify-center text-xs sm:text-base mt-4"
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowModal(false)}
           >
             Cancel
           </button>
