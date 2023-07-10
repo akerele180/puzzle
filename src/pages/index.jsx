@@ -9,6 +9,7 @@ const Home = () => {
 
       <Link
         to="/login"
+        state='Log In'
         className="text-center bg-primary rounded-md text-white px-8 py-4 text-lg font-semibold"
       >
         Get Started

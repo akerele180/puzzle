@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import { useState } from "react";
 // import data from "../../utils/data/banks.json";
 import "./banks.css";
 import { useEffect } from "react";
@@ -109,7 +109,7 @@ const Modal = ({ showModal, setShowModal }) => {
       >
         <span
           className="absolute top-0 right-0 duration-200 ease-in rounded-se cursor-pointer hover:bg-red-700 px-2 py-1 hover:text-white "
-          onClick={() => setShowModal({ state: false, name: "" })}
+          onClick={() => {setShowModal({ state: false, name: "" }), setStep1(false)}}
         >
           &#128473;
         </span>
@@ -127,7 +127,9 @@ const Modal = ({ showModal, setShowModal }) => {
             value="personal"
             required
           />
-          <label htmlFor="type1">Personal Account</label>
+          <label htmlFor="type1" className="dark:text-white">
+            Personal Account
+          </label>
           <br />
           <input
             type="radio"
@@ -137,16 +139,24 @@ const Modal = ({ showModal, setShowModal }) => {
             value="company"
             required
           />
-          <label htmlFor="type2">Company Account</label>
+          <label htmlFor="type2" className="dark:text-white">
+            Company Account
+          </label>
           <br />
           <input type="checkbox" className="mr-2 mt-4" id="add_account" />
-          <label htmlFor="add_account" className="mt-4 font-medium">
+          <label
+            htmlFor="add_account"
+            className="mt-4 font-medium dark:text-white"
+          >
             Add {showModal.name ?? "--"}
           </label>
           <div className="flex items-center justify-center gap-3">
             <button
               className="text-[#6366F1] bg-white border border-[#6366F1] font-semibold w-1/3 md:w-2/6 hover:shadow-lg py-2 px-3 rounded flex items-center justify-center text-xs sm:text-base mt-4"
-              onClick={() => {setShowModal({state:false,name:''}); setStep1(false)}}
+              onClick={() => {
+                setShowModal({ state: false, name: "" });
+                setStep1(false);
+              }}
             >
               Cancel
             </button>
