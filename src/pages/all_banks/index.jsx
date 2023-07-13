@@ -116,7 +116,7 @@ const Modal = ({ showModal, setShowModal }) => {
 
         {/* step 1 form */}
         <div className={`space-y-3 ${step1 && "hidden"}`}>
-          <div className="text-center font-semibold pb-2 text-lg">
+          <div className="text-center font-semibold pb-2 text-lg dark:text-white">
             Choose Account Type.
           </div>
           <input
@@ -127,7 +127,7 @@ const Modal = ({ showModal, setShowModal }) => {
             value="personal"
             required
           />
-          <label htmlFor="type1" className="dark:text-white">
+          <label htmlFor="type1" className="max-sm:text-xs dark:text-white">
             Personal Account
           </label>
           <br />
@@ -139,7 +139,7 @@ const Modal = ({ showModal, setShowModal }) => {
             value="company"
             required
           />
-          <label htmlFor="type2" className="dark:text-white">
+          <label htmlFor="type2" className="max-sm:text-xs dark:text-white">
             Company Account
           </label>
           <br />
